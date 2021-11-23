@@ -46,10 +46,53 @@ clean-webpack-plugin // 번들링 할때마다 이전 번들링 결과를 제거
 
 webpack.config.js 파일에 설정을 추가할 수 있다.
 
+예시를 통해 webpack 주요 설정들을 알아보자
+
 ```js
 module.exports = {
-  entry: {
-    main: './src/index.js',
+  // 번들링 될 진입점을 설정 => SPA일 경우 하나의 진입점
+  entry: './src/index.js',
+
+  // 모듈이 처리되는 방식을 설정
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
+
+  // 프로젝트 내의 다양한 유형의 모듈이 처리(해석, 변환 등)되는 방식을 설정
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: '/node_modules/',
+        loader: 'babel-loader', // 로더가 1개 이상이라면 use 프로퍼티에 배열로 추가
+        options: { presets: ['@babel-preset-env'] },
+      },
+    ],
+  },
+
+  // 번들링 결과물에 대한 설정
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
+  },
+
+  // 웹팩의 기본 동작에 추가적인 기능을 제공하는 설정 => 생성자 함수 형태로 배열에 추가한다.
+  plugins: [
+    // 번들링 할때마다 이전 번들링 결과를 제거 해주는 플러그인
+    new CleanWebpackPlugin(),
+    // 웹팩으로 빌드한 결과물로 HTML 파일을 생성해주는 플러그인
+    new HtmlWebpackPlugin({
+      template: `./public/index.html`, // 번들링 파일을 주입하고 번들링 폴더로 복사할 대상 HTML 파일
+    }),
+  ]
+
+  // webpack-dev-server에 대한 설정
+  devServer: {
+    port: 3000,
+    hot: true,
+    devMiddleware: {
+      writeToDisk: true,
+    },
   },
 };
 ```
