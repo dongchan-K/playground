@@ -24,7 +24,7 @@
 
 웹팩 핵심 패키지 설치
 
-```json
+```
 webpack // 웹팩 코어
 webpack-cli // 웹팩을 커맨드라인에서 사용 가능하게 함
 webpack-dev-server // 웹팩을 개발 서버에서 구동 가능하게 함
@@ -32,14 +32,14 @@ webpack-dev-server // 웹팩을 개발 서버에서 구동 가능하게 함
 
 로더(Loader)는 웹팩이 자바스크립트가 아닌 파일(HTML, CSS, Image 등..)을 변환할 수 있게 돕는다.
 
-```json
+```
 // 기본적인 로더 설치
 npm i -D babel-loader css-loader file-loader
 ```
 
 웹팩을 번들링 한 후에 적용할 플러그인 설치
 
-```json
+```
 html-webpack-plugin // 웹팩으로 빌드한 결과물로 HTML 파일을 생성
 clean-webpack-plugin // 번들링 할때마다 이전 번들링 결과를 제거
 ```
