@@ -1,10 +1,13 @@
+import Component from 'practice/Component';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <React.StrictMode></React.StrictMode>,
+  <React.StrictMode>
+    <Component />
+  </React.StrictMode>,
   document.getElementById('root')
 );
 
