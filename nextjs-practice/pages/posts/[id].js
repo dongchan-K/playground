@@ -1,10 +1,13 @@
 import React from 'react';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 
 const Post = ({ data }) => {
+  const router = useRouter();
+  const { id } = router.query;
   return (
     <div>
-      <h1>Post</h1>
+      <h1>PostItem : {id}</h1>
       <ul>
         <li
           style={{
@@ -19,7 +22,7 @@ const Post = ({ data }) => {
   );
 };
 
-export async function getStaticProps() {
+export const getStaticProps = async () => {
   const { data } = await axios.get(
     `https://api.thecatapi.com/v1/images/search`,
   );
@@ -31,7 +34,26 @@ export async function getStaticProps() {
   }
   return {
     props: { data },
+    revalidate: 10,
   };
-}
+};
+
+export const getStaticPaths = async () => {
+  const { data } = await axios.get(
+    `https://api.thecatapi.com/v1/images/search`,
+  );
+
+  const paths = data.map((item) => {
+    return {
+      params: { id: item.id },
+    };
+  });
+  console.log(paths);
+
+  return {
+    paths,
+    fallback: 'blocking',
+  };
+};
 
 export default Post;
