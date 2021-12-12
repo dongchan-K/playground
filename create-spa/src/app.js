@@ -1,5 +1,7 @@
+import { initRoute } from './utils/router.js';
+
 const app = root => {
-  root.innerHTML = `<h1 class="test">Single Page App</h1>`;
+  initRoute(root);
 };
 
 export default app;

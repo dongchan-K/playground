@@ -1,4 +1,4 @@
-import '../public/style.css';
+import './style.css';
 import app from './app.js';
 
 const $root = document.querySelector('#root');
